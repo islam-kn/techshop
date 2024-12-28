@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Current Promotions{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center mb-5">Current Promotions</h1>
+
+    {% if promotions %}
+    <div class="row">
+        {% for promotion in promotions %}
+        <div class="col-md-6 mb-4">
+            <div class="card promotion-card h-100">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="{{ promotion.image_url }}" class="img-fluid rounded-start h-100" alt="{{ promotion.name }}" style="object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div class="promotion-badge">
+                                <span class="badge bg-danger">{{ promotion.discount_percent }}% OFF</span>
+                            </div>
+                            <h3 class="card-title">{{ promotion.name }}</h3>
+                            <p class="card-text">{{ promotion.description }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Valid until {{ promotion.end_date.strftime('%B %d, %Y') }}
+                                </small>
+                            </p>
+                            <a href="{{ url_for('category', slug=promotion.category.slug) if promotion.category else url_for('home') }}" 
+                               class="btn btn-primary">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-tag fa-4x text-muted mb-3"></i>
+        <h3>No Active Promotions</h3>
+        <p class="text-muted">Check back later for new deals!</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+.promotion-card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    overflow: hidden;
+}
+
+.promotion-card:hover {
+    transform: translateY(-5px);
+}
+
+.promotion-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.promotion-badge .badge {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    padding: 0.75rem 2rem;
+    font-weight: 500;
+}
+</style>
+{% endblock %}

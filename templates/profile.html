@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title mb-4">My Profile</h1>
+                    
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" value="{{ current_user.email }}" disabled>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ current_user.name }}" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{ current_user.phone }}">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Shipping Address</label>
+                            <textarea class="form-control" id="address" name="address" rows="3">{{ current_user.address }}</textarea>
+                        </div>
+                        
+                        <hr>
+                        
+                        <h5 class="mb-3">Change Password</h5>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                            <small class="text-muted">Leave blank if you don't want to change your password</small>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="{{ url_for('orders') }}" class="btn btn-outline-primary">View My Orders</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
