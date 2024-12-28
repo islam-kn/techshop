@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Add New Promotion</h1>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Promotion Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="discount_percent" class="form-label">Discount Percentage</label>
+                    <input type="number" class="form-control" id="discount_percent" name="discount_percent" min="0" max="100" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image_url" class="form-label">Image URL</label>
+                    <input type="url" class="form-control" id="image_url" name="image_url" required>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Add Promotion</button>
+                    <a href="{{ url_for('admin_promotions') }}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
